@@ -1,0 +1,4 @@
+Use this file to add syntax hilighting to Anjuta and GEdit
+
+Copy the lang file to:
+  /usr/share/gtksourceview-3.0/language-specs
