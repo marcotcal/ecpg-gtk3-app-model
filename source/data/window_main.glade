@@ -2,64 +2,6 @@
 <!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.10"/>
-  <object class="GtkAdjustment" id="adjust_discount">
-    <property name="upper">100</property>
-    <property name="step-increment">1</property>
-    <property name="page-increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="adjust_height">
-    <property name="upper">100000</property>
-    <property name="step-increment">0.01</property>
-    <property name="page-increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="adjust_length">
-    <property name="upper">100000</property>
-    <property name="step-increment">0.01</property>
-    <property name="page-increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="adjust_unitary_price">
-    <property name="upper">100000</property>
-    <property name="step-increment">0.01</property>
-    <property name="page-increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="adjust_weight">
-    <property name="upper">100000</property>
-    <property name="step-increment">0.01</property>
-    <property name="page-increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="adjust_width">
-    <property name="upper">100000</property>
-    <property name="step-increment">0.01</property>
-    <property name="page-increment">10</property>
-  </object>
-  <object class="GtkListStore" id="delivery_class_list">
-    <columns>
-      <!-- column-name code -->
-      <column type="gchararray"/>
-      <!-- column-name description -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkTextBuffer" id="detail_buffer"/>
-  <object class="GtkListStore" id="images_list"/>
-  <object class="GtkTextBuffer" id="notes_buffer"/>
-  <object class="GtkListStore" id="products_list">
-    <columns>
-      <!-- column-name Id -->
-      <column type="gint"/>
-      <!-- column-name caption -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkTextBuffer" id="specification_buffer"/>
-  <object class="GtkListStore" id="tax_type_list">
-    <columns>
-      <!-- column-name code -->
-      <column type="gchararray"/>
-      <!-- column-name description -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
   <object class="GtkWindow" id="window_main">
     <property name="can-focus">False</property>
     <property name="title" translatable="yes">Template Window</property>
