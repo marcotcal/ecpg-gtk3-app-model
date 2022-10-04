@@ -1,0 +1,14 @@
+#include "actions.h"
+#include "user_interface.h"
+
+void on_window_main_destroy()
+{
+	gtk_main_quit();
+}
+
+void on_btn_quit_clicked()
+{
+	gtk_main_quit();
+}
+
+

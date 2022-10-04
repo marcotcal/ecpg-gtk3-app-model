@@ -1,0 +1,33 @@
+#include <libpq-fe.h>
+#include "user_interface.h"
+
+void show_error(char *msg) 
+{
+	GtkWidget* info;
+	GtkLabel* label;
+	
+	info = GTK_WIDGET(gtk_builder_get_object(builder, "info"));
+	label = GTK_LABEL(gtk_builder_get_object(builder, "message"));
+	gtk_label_set_text(label, msg);
+	gtk_info_bar_set_message_type (GTK_INFO_BAR(info), GTK_MESSAGE_ERROR);
+	gtk_widget_show(info);
+}
+
+void show_info(char *msg) 
+{
+	GtkWidget* info;
+	GtkLabel* label;
+	
+	info = GTK_WIDGET(gtk_builder_get_object(builder, "info"));
+	label = GTK_LABEL(gtk_builder_get_object(builder, "message"));
+	gtk_label_set_text(label, msg);
+	gtk_info_bar_set_message_type (GTK_INFO_BAR(info), GTK_MESSAGE_INFO);
+	gtk_widget_show(info);
+}
+
+void init_info() {
+	GtkWidget* info;
+	info = GTK_WIDGET(gtk_builder_get_object(builder, "info"));
+	gtk_widget_hide(info);
+	g_signal_connect (info, "response", G_CALLBACK (gtk_widget_hide), NULL);
+}

@@ -1,0 +1,113 @@
+#include <libpq-fe.h>
+#include "fields.h"
+#include "user_interface.h"
+
+
+/** 
+	set	values 
+**/
+
+void set_text_value(const gchar *field_name, char *value) {
+	GtkTextBuffer* buffer;
+	GtkTextIter iter;
+	GtkTextIter start;
+	GtkTextIter end;
+	GtkTextMark *mark;
+
+	buffer = GTK_TEXT_BUFFER(gtk_builder_get_object(builder, field_name));
+	// clear buffer
+	gtk_text_buffer_get_bounds(buffer, &start, &end);
+	gtk_text_buffer_delete(buffer, &start, &end);
+	// insert text
+	mark = gtk_text_buffer_get_insert (buffer);
+	gtk_text_buffer_get_iter_at_mark (buffer, &iter, mark);
+	gtk_text_buffer_insert(buffer, &iter, value, -1);
+}
+
+void set_entry_value(const gchar *field_name, char *value) {
+	GtkEntry* field;
+
+	field = GTK_ENTRY(gtk_builder_get_object(builder, field_name));
+	gtk_entry_set_text(field, value);
+}
+
+void set_spinner_value(const gchar* field_name, double value) {
+	GtkAdjustment *field;
+	
+	field = GTK_ADJUSTMENT(gtk_builder_get_object(builder, field_name));
+	gtk_adjustment_set_value(field, value);
+}
+
+void set_combobox_value(const gchar* field_name, char* value) {
+	GtkComboBox* combo; 
+
+	combo = GTK_COMBO_BOX(gtk_builder_get_object(builder, field_name));
+	gtk_combo_box_set_active_id (combo, value);
+}
+
+/**
+	get values 
+**/
+
+gchar *get_text_value(const gchar* field_name) 
+{
+	GtkTextBuffer* buffer;
+	GtkTextIter start;
+	GtkTextIter end;
+
+	buffer = GTK_TEXT_BUFFER(gtk_builder_get_object(builder, field_name));
+	gtk_text_buffer_get_bounds(buffer, &start, &end);
+	return gtk_text_buffer_get_text(buffer, &start, &end, true);	
+}
+
+const gchar* get_entry_value(const gchar* field_name) 
+{
+	GtkEntry* field;
+
+	field = GTK_ENTRY(gtk_builder_get_object(builder, field_name));
+	return gtk_entry_get_text(field);
+}
+
+double get_spinner_value(const gchar* field_name) 
+{
+	GtkAdjustment *field;
+	
+	field = GTK_ADJUSTMENT(gtk_builder_get_object(builder, field_name));
+	return gtk_adjustment_get_value(field);
+}
+
+gchar* get_combobox_str_value(const gchar* field_name, int column)
+{
+	GtkComboBox* combo; 
+	GtkTreeModel* model; 
+	gchar* value;
+	GtkTreeIter iter;
+
+	combo = GTK_COMBO_BOX(gtk_builder_get_object(builder, field_name));
+	if (gtk_combo_box_get_active_iter(combo, &iter)) 
+	{
+		model = gtk_combo_box_get_model(GTK_COMBO_BOX(combo));
+		gtk_tree_model_get(model, &iter, column, &value,  -1);
+	} else { 
+		value = NULL;
+	}
+	return value;
+}
+
+int get_combobox_int_value(const gchar* field_name, int column)
+{
+	GtkComboBox* combo; 
+	GtkTreeModel* model; 
+	int value;
+	GtkTreeIter iter;
+
+	combo = GTK_COMBO_BOX(gtk_builder_get_object(builder, field_name));
+	if (gtk_combo_box_get_active_iter(combo, &iter)) 
+	{
+		model = gtk_combo_box_get_model(GTK_COMBO_BOX(combo));
+		gtk_tree_model_get(model, &iter, column, &value,  -1);
+	} else {
+		value = -1;
+	}
+	return value;
+}

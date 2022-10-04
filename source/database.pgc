@@ -1,0 +1,33 @@
+#include "database.h"
+#include "user_interface.h"
+
+void show_fatal_database_error()
+{
+    fprintf(stderr, "==== sqlca ====\n");
+    fprintf(stderr, "sqlcode: %ld\n", sqlca.sqlcode);
+    fprintf(stderr, "sqlerrm.sqlerrml: %d\n", sqlca.sqlerrm.sqlerrml);
+    fprintf(stderr, "sqlerrm.sqlerrmc: %s\n", sqlca.sqlerrm.sqlerrmc);
+    fprintf(stderr, "sqlerrd: %ld %ld %ld %ld %ld %ld\n", sqlca.sqlerrd[0],sqlca.sqlerrd[1],sqlca.sqlerrd[2],
+                                                          sqlca.sqlerrd[3],sqlca.sqlerrd[4],sqlca.sqlerrd[5]);
+    fprintf(stderr, "sqlwarn: %d %d %d %d %d %d %d %d\n", sqlca.sqlwarn[0], sqlca.sqlwarn[1], sqlca.sqlwarn[2],
+                                                          sqlca.sqlwarn[3], sqlca.sqlwarn[4], sqlca.sqlwarn[5],
+                                                          sqlca.sqlwarn[6], sqlca.sqlwarn[7]);
+    fprintf(stderr, "sqlstate: %5s\n", sqlca.sqlstate);
+    fprintf(stderr, "===============\n");
+
+    exit(1); 
+}
+
+void connect_db()
+{
+    EXEC SQL
+        WHENEVER SQLERROR CALL show_fatal_database_error();
+
+	// change the connection string to fit to your project 
+	// I did no implemented a user login mechanism for now
+	// Replace unix:postgresql to tcp:postgresql for remote connections
+
+	EXEC SQL 
+		CONNECT TO unix:postgresql://localhost/postgres AS conn USER marcotc;
+	    
+}
