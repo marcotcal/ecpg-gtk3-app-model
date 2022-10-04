@@ -214,6 +214,7 @@
       <keyword>CONNECT</keyword>
       <keyword>SELECT</keyword>
       <keyword>UPDATE</keyword>
+      <keyword>DELETE</keyword>
       <keyword>INSERT</keyword>
       <keyword>VALUES</keyword>
       <keyword>DECLARE</keyword>
