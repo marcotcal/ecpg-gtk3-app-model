@@ -76,6 +76,7 @@ $(BLD)/main.o : $(SRC)/main.c $(SRC)/version.h $(BLD)/data.h | mkdirs
 $(BLD)/version.o : $(SRC)/version.c $(SRC)/version.h | mkdirs
 $(BLD)/data.o : $(BLD)/data.c $(BLD)/data.h | mkdirs
 $(BLD)/database.o : $(SRC)/database.c $(SRC)/database.h | mkdirs
+$(BLD)/dbutils.o : $(SRC)/dbutils.c $(SRC)/dbutils.h | mkdirs
 $(BLD)/user_interface.o : $(SRC)/user_interface.c $(SRC)/user_interface.h | mkdirs
 $(BLD)/fields.o : $(SRC)/fields.c $(SRC)/fields.h | mkdirs
 $(BLD)/actions.o : $(SRC)/actions.c $(SRC)/actions.h | mkdirs

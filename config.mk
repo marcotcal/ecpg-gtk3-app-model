@@ -54,7 +54,7 @@ DATA    ?= $(SRC)/data
 #Files
 BIN       ?= $(BLD)/bin/$(TARGET)
 OBJ       ?= $(BLD)/main.o $(BLD)/actions.o $(BLD)/database.o $(BLD)/user_interface.o $(BLD)/version.o $(BLD)/data.o \
-             $(BLD)/fields.o 
+             $(BLD)/fields.o $(BLD)/dbutils.o
 GLADE     ?= $(DATA)/window_main.glade
 RESOURCES ?= $(DATA)/icon.svg $(DATA)/window_main.glade
 DESKTOP   ?= $(BLD)/$(TARGET).desktop

@@ -1,7 +1,7 @@
 #include "database.h"
 #include "user_interface.h"
 
-void show_fatal_database_error()
+void show_fatal_database_error ()
 {
     fprintf(stderr, "==== sqlca ====\n");
     fprintf(stderr, "sqlcode: %ld\n", sqlca.sqlcode);
@@ -18,7 +18,7 @@ void show_fatal_database_error()
     exit(1); 
 }
 
-void connect_db()
+void connect_db ()
 {
     EXEC SQL
         WHENEVER SQLERROR CALL show_fatal_database_error();

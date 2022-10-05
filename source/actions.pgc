@@ -1,14 +1,19 @@
 #include "actions.h"
 #include "user_interface.h"
+#include "dbutils.h"
 
-void on_window_main_destroy()
+void on_window_main_destroy ()
 {
-	gtk_main_quit();
+	gtk_main_quit ();
 }
 
-void on_btn_quit_clicked()
+void on_btn_quit_clicked ()
 {
-	gtk_main_quit();
+	gtk_main_quit ();
 }
 
+void on_btn_list_clicked ()
+{
+	show_all_databases ();
+}
 

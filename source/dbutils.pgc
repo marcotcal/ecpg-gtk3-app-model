@@ -1,0 +1,81 @@
+#include "database.h"
+#include "user_interface.h"
+#include <pg_config_manual.h>
+#include "database.h"
+#include "user_interface.h"
+
+enum 
+{
+	DATNAME = 0,
+	DATDBA,
+	ENCODING,
+	DATALLOWCONN,
+	DATCONNLIMIT,
+	DATFROZENXIDI,
+	TBLSPC
+};
+
+void show_all_databases () 
+{
+	EXEC SQL BEGIN DECLARE SECTION;
+		VARCHAR datname[NAMEDATALEN];
+		VARCHAR datdba[NAMEDATALEN];
+		VARCHAR encoding[NAMEDATALEN];
+  		bool datallowconn;
+		int datconnlimit;
+		long int datfrozenxidi;
+		VARCHAR tblspc[NAMEDATALEN];
+	EXEC SQL END DECLARE SECTION; 
+
+	GtkTreeIter iter;
+	GtkListStore *list;
+
+	list = GTK_LIST_STORE(gtk_builder_get_object(builder, "databases_store"));
+
+	EXEC SQL 
+		DECLARE db_list CURSOR FOR
+			SELECT 
+				db.datname,
+				au.rolname as datdba,
+				pg_encoding_to_char(db.encoding) as encoding,
+				db.datallowconn,
+				db.datconnlimit,
+				db.datfrozenxid,
+				tb.spcname as tblspc
+			FROM 
+				pg_database db
+				JOIN pg_authid au ON au.oid = db.datdba
+				JOIN pg_tablespace tb ON tb.oid = db.dattablespace
+			ORDER BY db.datname;
+	
+	EXEC SQL 
+		WHENEVER NOT FOUND DO BREAK;
+
+	EXEC SQL 
+		OPEN db_list;
+
+	gtk_list_store_clear(list);
+
+	while(true)
+	{
+		EXEC SQL 
+			FETCH db_list INTO 
+				:datname, :datdba, :encoding, :datallowconn, :datconnlimit
+				:datfrozenxidi, :tblspc;
+		gtk_list_store_append (list, &iter);
+		gtk_list_store_set (list, &iter,
+					DATNAME, datname.arr, 
+	      				DATDBA, datdba.arr,
+	     				ENCODING, encoding.arr,
+					DATALLOWCONN, datallowconn,
+					DATCONNLIMIT, datconnlimit, 
+					DATFROZENXIDI, datfrozenxidi,
+					TBLSPC, tblspc.arr, 
+					-1);
+	}
+	
+	EXEC SQL
+		CLOSE db_list;
+
+}
+
