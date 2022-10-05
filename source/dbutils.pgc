@@ -71,7 +71,7 @@ void show_all_databases ()
 					DATCONNLIMIT, datconnlimit, 
 					DATFROZENXIDI, datfrozenxidi,
 					TBLSPC, tblspc.arr, 
-					-1);
+					__END_OF_RECORD__);
 	}
 	
 	EXEC SQL
