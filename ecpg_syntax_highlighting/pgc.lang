@@ -218,6 +218,8 @@
       <keyword>INSERT</keyword>
       <keyword>VALUES</keyword>
       <keyword>DECLARE</keyword>
+      <keyword>ORDER</keyword>
+      <keyword>BY</keyword>
       <keyword>SECTION</keyword>
       <keyword>BEGIN</keyword>
       <keyword>END</keyword>
