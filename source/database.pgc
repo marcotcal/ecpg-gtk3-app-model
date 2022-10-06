@@ -28,6 +28,6 @@ void connect_db ()
 	// Replace unix:postgresql to tcp:postgresql for remote connections
 
 	EXEC SQL 
-		CONNECT TO unix:postgresql://localhost/postgres AS conn USER marcotc;
+		CONNECT TO unix:postgresql://localhost/postgres AS conn USER postgres;
 	    
 }
